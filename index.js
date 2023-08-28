@@ -66,7 +66,7 @@ exports.handler = async () => {
             const snsParams = {
                 Message: 'No log group found with Never Expire Retention.',
                 TopicArn: 'arn:aws:sns:us-west-2:769927864004:cup-support-internal-log-retention-notification',
-                Subject: "Log Retention Time Update Report",
+                Subject: "Log Retention Update Report",
             };
 
             await sns.publish(snsParams).promise();
@@ -82,7 +82,7 @@ exports.handler = async () => {
         const snsParams = {
             Message: JSON.stringify(logGroupDetails, null, 2),
             TopicArn: 'arn:aws:sns:us-west-2:769927864004:cup-support-internal-log-retention-notification',
-            Subject: "Log Retention Time Update Report",
+            Subject: "Log Retention Update Report",
         };
 
         await sns.publish(snsParams).promise();
