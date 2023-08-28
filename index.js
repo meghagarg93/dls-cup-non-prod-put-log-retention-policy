@@ -36,7 +36,7 @@ exports.handler = async () => {
                     // If the log group has "never expire" retention policy, set a custom retention policy
                     const logGroupNameLowerCase = logGroupName.toLowerCase();
                     if (logGroupNameLowerCase.includes('cloudtrail')) {
-                        customRetentionDays = 90;
+                        customRetentionDays = 365;
                     } else if (logGroupNameLowerCase.includes('codebuild')) {
                         customRetentionDays = 1;
                     } else {
@@ -65,7 +65,7 @@ exports.handler = async () => {
         if (logGroupDetails.length === 0) {
             const snsParams = {
                 Message: 'No log group found with Never Expire Retention.',
-                TopicArn: 'arn:aws:sns:us-west-2:567434252311:Inspector_to_Email',
+                TopicArn: 'arn:aws:sns:us-west-2:769927864004:cup-support-internal-log-retention-notification',
                 Subject: "Log Retention Time Update Report",
             };
 
@@ -81,7 +81,7 @@ exports.handler = async () => {
         // Publish the log group details to the SNS topic
         const snsParams = {
             Message: JSON.stringify(logGroupDetails, null, 2),
-            TopicArn: 'arn:aws:sns:us-west-2:567434252311:Inspector_to_Email',
+            TopicArn: 'arn:aws:sns:us-west-2:769927864004:cup-support-internal-log-retention-notification',
             Subject: "Log Retention Time Update Report",
         };
 
@@ -102,7 +102,7 @@ exports.handler = async () => {
 
         const snsParams = {
             Message: JSON.stringify(errorWithDetails, null, 2),
-            TopicArn: 'arn:aws:sns:us-west-2:567434252311:Inspector_to_Email',
+            TopicArn: 'arn:aws:sns:us-west-2:769927864004:cup-support-internal-log-retention-notification',
             Subject: "Error in Setting Log Retention Policy",
         };
 
